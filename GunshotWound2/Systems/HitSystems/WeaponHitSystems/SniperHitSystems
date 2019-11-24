@@ -1,0 +1,30 @@
+using GTA.Native;
+using GunshotWound2.Components.Events.WeaponHitEvents;
+using Leopotam.Ecs;
+
+namespace GunshotWound2.Systems.HitSystems.WeaponHitSystems
+{
+    [EcsInject]
+    public class HighCaliberHitSystem : BaseWeaponHitSystem
+    {
+        protected override uint[] GetWeaponHashes()
+        {
+            return new[]
+            { 
+                (uint) WeaponHash.Sniper,
+                (uint) WeaponHash.HeavySniper, 
+                (uint) WeaponHash.HeavySniperMk2,
+                (uint) WeaponHash.MarksmanRifle, 
+                (uint) WeaponHash.MarksmanRifleMk2, 
+
+            };
+        }
+        
+        protected override void CreateComponent(int pedEntity)
+        {
+            EcsWorld
+                .CreateEntityWith<HighCaliberHitEvent>()
+                .Entity = pedEntity;
+        }
+    }
+}
